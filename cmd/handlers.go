@@ -4,6 +4,8 @@ package main
 import (
 	"Cinema/pkg/models"
 	"errors"
+	"html/template"
+	"log"
 	"net/http"
 	"strconv"
 )
@@ -35,7 +37,35 @@ func (app *application) retrieveMovie(w http.ResponseWriter, r *http.Request) {
 	// Логика для получения информации о фильме
 }
 func (app *application) home(w http.ResponseWriter, r *http.Request) {
-	// Логика для возврата билета
+	// Home page logic
+	if r.URL.Path != "/" {
+		http.NotFound(w, r)
+		return
+	}
+
+	// Initialize a slice containing the paths to the two files. Note that the
+	// home.page.tmpl file must be the *first* file in the slice.
+	files := []string{
+		"./ui/html/home.page.tmpl",
+		"./ui/html/base.layout.tmpl",
+		"./ui/html/footer.partial.tmpl",
+	}
+
+	// Using template.ParseFiles() function to read the template file
+	ts, err := template.ParseFiles(files...)
+	if err != nil {
+		log.Println(err.Error())
+		http.Error(w, "Internal Server Error", 500)
+		return
+	}
+
+	// Using the Execute() method on the template set to write the template
+	// content as the response body.
+	err = ts.Execute(w, nil)
+	if err != nil {
+		log.Println(err.Error())
+		http.Error(w, "Internal Server Error", 500)
+	}
 }
 func (app *application) contacts(w http.ResponseWriter, r *http.Request) {
 	// Логика для возврата билета
