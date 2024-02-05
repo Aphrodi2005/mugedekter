@@ -14,6 +14,7 @@ type templateData struct {
 	Movies        []*models.Movie
 	Movie         *models.Movie
 	SelectedGenre string
+	Tickets       []*models.Ticket
 }
 
 func humanDate(t time.Time) string {

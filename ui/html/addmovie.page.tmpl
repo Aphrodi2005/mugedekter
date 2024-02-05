@@ -1,0 +1,12 @@
+{{ define "content" }}
+    <h1 class="my-4">Добавить фильм</h1>
+    <form action="/add-movie" method="post">
+        <label for="title">Название:</label>
+        <input type="text" id="title" name="title" required><br>
+        <label for="genre">Жанр:</label>
+        <input type="text" id="genre" name="genre" required><br>
+        <label for="rating">Рейтинг:</label>
+        <input type="text" id="rating" name="rating" required><br>
+        <button type="submit">Добавить фильм</button>
+    </form>
+{{ end }}

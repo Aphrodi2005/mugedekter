@@ -1,0 +1,8 @@
+{{ define "content" }}
+    <h1 class="my-4">Все фильмы</h1>
+    <ul>
+        {{ range .Movies }}
+            <li>{{ .Title }} ({{ .Genre }}) - Рейтинг: {{ .Rating }}</li>
+        {{ end }}
+    </ul>
+{{ end }}
